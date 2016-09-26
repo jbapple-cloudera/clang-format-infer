@@ -1,6 +1,8 @@
 clang-format-infer tries to find a clang-format file that matches the style of your
 existing codebase as closely as possible.
 
+It is known to work with clang-format 3.8.
+
 Usage:
 
 First, put the source files you want to optimize for in a directory.

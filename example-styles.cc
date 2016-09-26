@@ -1,3 +1,11 @@
+// This file serves only as a jury-rigged method of reflection of the clang-format
+// options. It prints out as many pre-set options as clang-format provides. That should,
+// hypothetically, work with clang-format -dump-config, but that isn't always
+// reliable. For instance, with clang-format 3.8, it won't print out the Java config with
+// the Google style.
+//
+// The output of this program is a list of filename containing the pre-set styles.
+
 #include <cstdlib>
 #include <iostream>
 #include <system_error>
