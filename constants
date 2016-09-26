@@ -1,0 +1,21 @@
+# This is an example of the kind of file you should pass as the argument to search.py. The
+# argument should be a YAML file containing the parameters that are fixed during the
+# search.
+
+# There is no reason to change the language during a search
+Language: Java
+
+# If you set no limit, the config that changes your code the least will be the one with
+# the highest column limit.
+ColumnLimit: 90
+
+# DerivePointerAlignment allows each file to have a different pointer alignment. We
+# disalow that here to search for a maximum for all files.
+DerivePointerAlignment: false
+
+# If Disable Format is set, clang-format does no work.
+DisableFormat: false
+
+# ExperimentalAutoDetectBinPacking is like DerivePointerAlignment, in that it allows
+# between-file variance.
+ExperimentalAutoDetectBinPacking: false

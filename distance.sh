@@ -14,3 +14,5 @@ cp "${CONFIG}" "${CELL}/.clang-format"
 find "${CELL}/new" -type f -execdir "${FORMATTER}" -i -style=file {} \;
 
 diff --suppress-common-lines -ru "${DIR}" "${CELL}/new/$(basename ${DIR})" | wc -l
+
+rm -rf "${CELL}"

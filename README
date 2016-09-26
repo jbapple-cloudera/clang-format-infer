@@ -1,3 +1,14 @@
 make && LD_LIBRARY_PATH=${PATH_TO_GCC_DIR}/lib64:${LD_LIBRARY_PATH} ./search.exe
 
 For me, that's PATH_TO_GCC_DIR is /opt/Impala-Toolchain/gcc-4.9.2
+
+For use in Impala on C++:
+
+for foo in $(find . -type f \( -name '*.c*' -or -name '*.h' \) \
+| grep -v gutil \
+| grep -v thirdparty); do cp $foo /tmp/clang-find-cpp/$(echo $foo | tr '/' 'Z'); done
+
+For use in Impala on Java:
+
+for foo in $(find . -type f -name '*.java'); \
+do cp $foo /tmp/clang-find-java/$(echo $foo | tr '/' 'Z'); done
