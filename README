@@ -1,14 +1,16 @@
-make && LD_LIBRARY_PATH=${PATH_TO_GCC_DIR}/lib64:${LD_LIBRARY_PATH} ./search.exe
+clang-format-inder tries to infer a clang-format file that matches the style of
+your existing codebase as closely as possible.
 
-For me, that's PATH_TO_GCC_DIR is /opt/Impala-Toolchain/gcc-4.9.2
+Usage:
 
-For use in Impala on C++:
+First, put the files you want to optimize for in a directory.
 
-for foo in $(find . -type f \( -name '*.c*' -or -name '*.h' \) \
-| grep -v gutil \
-| grep -v thirdparty); do cp $foo /tmp/clang-find-cpp/$(echo $foo | tr '/' 'Z'); done
+Second, alter the "constants" file to fit your required options.
 
-For use in Impala on Java:
+Finally:
 
-for foo in $(find . -type f -name '*.java'); \
-do cp $foo /tmp/clang-find-java/$(echo $foo | tr '/' 'Z'); done
+./clang-format-infer.sh --cxx-compiler=... --clang-format=... --constants=... --source-dir=...
+
+The program never halts, but it periodically prints to stdout the filename of a config
+containing the best options it has found so far. That file is meant to be set as your
+.clang-format file.

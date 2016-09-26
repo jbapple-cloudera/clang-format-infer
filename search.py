@@ -166,7 +166,6 @@ def main():
   best_config = constants
   best_score = measure(best_config)
   best_file = save(best_config)
-  print best_file
 
   while True:
     # Hill climbing with random starting locations
