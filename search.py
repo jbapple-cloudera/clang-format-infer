@@ -140,7 +140,7 @@ def all_key_seqs(template):
   return result
 
 def make_template(filenames):
-  """Makes a tempalte from a list of YAML clang config files.
+  """Makes a template from a list of YAML clang config files.
 
   Infers valid values for different paths using the valid examples given.
   """
