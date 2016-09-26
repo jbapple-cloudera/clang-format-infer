@@ -1,9 +1,9 @@
-clang-format-inder tries to infer a clang-format file that matches the style of
-your existing codebase as closely as possible.
+clang-format-infer tries to find a clang-format file that matches the style of your
+existing codebase as closely as possible.
 
 Usage:
 
-First, put the files you want to optimize for in a directory.
+First, put the source files you want to optimize for in a directory.
 
 Second, alter the "constants" file to fit your required options.
 
@@ -11,6 +11,6 @@ Finally:
 
 ./clang-format-infer.sh --cxx-compiler=... --clang-format=... --constants=... --source-dir=...
 
-The program never halts, but it periodically prints to stdout the filename of a config
-containing the best options it has found so far. That file is meant to be set as your
-.clang-format file.
+The program never halts, but it periodically prints to stdout the filename of a
+clang-format config containing the best options found so far. That file is meant to be set
+as your .clang-format file.
