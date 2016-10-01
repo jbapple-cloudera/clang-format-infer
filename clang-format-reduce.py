@@ -127,7 +127,7 @@ def main():
   smallest = min(results)
   print >> sys.stderr, "#", smallest[0]
   print >> sys.stderr, "#", smallest[1]
-  print yaml.dump(smallest[2])
+  print yaml.dump(smallest[2], default_flow_style=False)
 
 if __name__ == "__main__":
   main()
