@@ -3,11 +3,23 @@
 # search.
 
 # There is no reason to change the language during a search
-Language: Java
+Language: Cpp
+
+Standard: Cpp11
+
+# To enable BraceWrapping, BreakBeforeBraces must be Custom
+BreakBeforeBraces: Custom
 
 # If you set no limit, the config that changes your code the least will be the one with
 # the highest column limit.
 ColumnLimit: 90
+
+# Other enforced settings just to keep the search from finding the most permissive
+# settings
+ReflowComments: true
+MaxEmptyLinesToKeep: 1
+KeepEmptyLinesAtTheStartOfBlocks: false
+SortIncludes: true
 
 # DerivePointerAlignment allows each file to have a different pointer alignment. We
 # disalow that here to search for a maximum for all files.
