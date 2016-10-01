@@ -125,8 +125,6 @@ def measure(config):
       [os.path.dirname(os.path.realpath(sys.argv[0])) + "/distance.sh",
        args.clangformat, name, args.sourcedir]))
   os.remove(name)
-  if 0 == val:
-    val = 2**60
   measure_cache[cache_key] = val
   return val
 
