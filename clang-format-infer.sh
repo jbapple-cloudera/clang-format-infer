@@ -23,14 +23,16 @@ REPETITIONS=${REPETITIONS:-"1"}
 
 CLANG_DIR=$(dirname "${CLANG_FORMAT}")/..
 
-make --silent CXX="${CXX_COMPILER}" CLANG_DIR="${CLANG_DIR}"
+THIS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+make --directory="${THIS_DIR}" --silent CXX="${CXX_COMPILER}" CLANG_DIR="${CLANG_DIR}"
 
 CXX_COMPILER_DIR=$(dirname "${CXX_COMPILER}")/..
 
 EXAMPLE_STYLES=$(mktemp)
 
 LD_LIBRARY_PATH="${CXX_COMPILER_DIR}"/lib64:${LD_LIBRARY_PATH} \
-                            ./example-styles.exe > "${EXAMPLE_STYLES}"
+               "${THIS_DIR}/example-styles.exe" > "${EXAMPLE_STYLES}"
 
 if [[ "${EXTENSIONS}" ]]
 then
@@ -46,15 +48,16 @@ fi
 
 echo "Files: " $(find ${SOURCE_DIR} -type f | wc -l) >&2
 
-BIG_CONFIG=$(./search.py --constants="${CONSTANTS}" \
-                         --clang-format="${CLANG_FORMAT}" \
-                         --source-dir="${SOURCE_DIR}" \
-                         --repetitions="${REPETITIONS}" < "${EXAMPLE_STYLES}")
+BIG_CONFIG=$("${THIS_DIR}/search.py" --constants="${CONSTANTS}" \
+                                     --clang-format="${CLANG_FORMAT}" \
+                                     --source-dir="${SOURCE_DIR}" \
+                                     --repetitions="${REPETITIONS}" < "${EXAMPLE_STYLES}")
 
-cat "${EXAMPLE_STYLES}" | xargs -L 1 ./re-style.sh \
-    | ./clang-format-reduce.py --config "${BIG_CONFIG}" --source-dir="${SOURCE_DIR}" \
-                               --clang-format="${CLANG_FORMAT}" \
-                               --constants="${CONSTANTS}"
+cat "${EXAMPLE_STYLES}" | xargs -L 1 ${THIS_DIR}/re-style.sh \
+    | "${THIS_DIR}/clang-format-reduce.py" --config "${BIG_CONFIG}" \
+                                           --source-dir="${SOURCE_DIR}" \
+                                           --clang-format="${CLANG_FORMAT}" \
+                                           --constants="${CONSTANTS}"
 
 rm "${BIG_CONFIG}"
 xargs rm < "${EXAMPLE_STYLES}"
