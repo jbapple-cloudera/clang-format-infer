@@ -169,7 +169,7 @@ def main():
 
   while True:
     # Hill climbing with random starting locations
-    print best_score, "best config yet is stored in", best_file
+    print >> sys.stderr, best_score, "best config yet is stored in", best_file
     # Start at a random place
     config = pick_random(template)
     # Override the constants
@@ -179,9 +179,9 @@ def main():
     local_best_config = config
     local_best_score = measure(local_best_config)
     improved = True
-    print local_best_score
+    print >> sys.stderr, local_best_score
     while improved:
-      print "NEW ROUND"
+      print >> sys.stderr, "NEW ROUND"
       improved = False
       random.shuffle(key_seqs)
       for key_seq in key_seqs:
@@ -194,13 +194,13 @@ def main():
             local_best_config = copy.deepcopy(config)
             local_best_score = new_score
             improved = True
-            print "IMPROVED", new_score, key_seq, oldval, get_deep(config, key_seq)
-    print "END OF ROUND"
+            print >> sys.stderr, "IMPROVED", new_score, key_seq, oldval, get_deep(config, key_seq)
+    print >> sys.stderr, "END OF ROUND"
     if local_best_score < best_score:
       best_config = copy.deepcopy(local_best_config)
       best_score = local_best_score
       best_file = save(best_config)
-      print "NEW BEST SCORE: ", best_score
+      print >> sys.stderr, "NEW BEST SCORE: ", best_score
 
 if __name__ == "__main__":
   main()

@@ -20,7 +20,7 @@ done
 
 CLANG_DIR=$(dirname "${CLANG_FORMAT}")/..
 
-make CXX="${CXX_COMPILER}" CLANG_DIR="${CLANG_DIR}"
+make --silent CXX="${CXX_COMPILER}" CLANG_DIR="${CLANG_DIR}"
 
 CXX_COMPILER_DIR=$(dirname "${CXX_COMPILER}")/..
 
