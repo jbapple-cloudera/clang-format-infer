@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OPTS=$(getopt -o '' --long cxx-compiler:,clang-format:,constants:,source-dir: -- "$@")
+OPTS=$(getopt -o '' --long cxx-compiler:,clang-format:,constants:,source-dir:,extensions: -- "$@")
 
 eval set -- "$OPTS"
 
@@ -13,6 +13,7 @@ while true; do
         --clang-format) CLANG_FORMAT=$2; shift 2;;
         --constants)    CONSTANTS=$2;    shift 2;;
         --source-dir)   SOURCE_DIR=$2;   shift 2;;
+        --extensions)   EXTENSIONS=$2;   shift 2;;
         *) break;;
     esac
 done
