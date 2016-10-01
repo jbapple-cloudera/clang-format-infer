@@ -27,9 +27,6 @@ make --silent CXX="${CXX_COMPILER}" CLANG_DIR="${CLANG_DIR}"
 
 CXX_COMPILER_DIR=$(dirname "${CXX_COMPILER}")/..
 
-LD_LIBRARY_PATH="${CXX_COMPILER_DIR}"/lib64:${LD_LIBRARY_PATH} ./example-styles.exe \
-    | ./search.py --constants="${CONSTANTS}" --clang-format="${CLANG_FORMAT}" \
-                  --source-dir="${SOURCE_DIR}"
 EXAMPLE_STYLES=$(mktemp)
 
 LD_LIBRARY_PATH="${CXX_COMPILER_DIR}"/lib64:${LD_LIBRARY_PATH} \
@@ -53,6 +50,11 @@ BIG_CONFIG=$(./search.py --constants="${CONSTANTS}" \
                          --clang-format="${CLANG_FORMAT}" \
                          --source-dir="${SOURCE_DIR}" \
                          --repetitions="${REPETITIONS}" < "${EXAMPLE_STYLES}")
+
+cat "${EXAMPLE_STYLES}" | xargs -L 1 ./re-style.sh \
+    | ./clang-format-reduce.py --config "${BIG_CONFIG}" --source-dir="${SOURCE_DIR}" \
+                               --clang-format="${CLANG_FORMAT}" \
+                               --constants="${CONSTANTS}"
 
 rm "${BIG_CONFIG}"
 xargs rm < "${EXAMPLE_STYLES}"
