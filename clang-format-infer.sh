@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OPTS=$(getopt -o '' --long cxx-compiler:,clang-format:,constants:,source-dir:,extensions: -- "$@")
+OPTS=$(getopt -o '' --long cxx-compiler:,clang-format:,constants:,source-dir:,extensions:,repetitions: -- "$@")
 
 eval set -- "$OPTS"
 
@@ -14,9 +14,12 @@ while true; do
         --constants)    CONSTANTS=$2;    shift 2;;
         --source-dir)   SOURCE_DIR=$2;   shift 2;;
         --extensions)   EXTENSIONS=$2;   shift 2;;
+        --repetitions)  REPETITIONS=$2;  shift 2;;
         *) break;;
     esac
 done
+
+REPETITIONS=${REPETITIONS:-"1"}
 
 CLANG_DIR=$(dirname "${CLANG_FORMAT}")/..
 
@@ -48,7 +51,8 @@ echo "Files: " $(find ${SOURCE_DIR} -type f | wc -l) >&2
 
 BIG_CONFIG=$(./search.py --constants="${CONSTANTS}" \
                          --clang-format="${CLANG_FORMAT}" \
-                         --source-dir="${SOURCE_DIR}" < "${EXAMPLE_STYLES}")
+                         --source-dir="${SOURCE_DIR}" \
+                         --repetitions="${REPETITIONS}" < "${EXAMPLE_STYLES}")
 
 rm "${BIG_CONFIG}"
 xargs rm < "${EXAMPLE_STYLES}"

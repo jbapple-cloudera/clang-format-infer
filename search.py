@@ -20,6 +20,8 @@ parser.add_argument("--clang-format", dest="clangformat", help="location of clan
 parser.add_argument("--source-dir", dest="sourcedir", help="directory of source code")
 parser.add_argument("--constants", dest="constants",
                     help="file of fixed config parameters")
+parser.add_argument("--repetitions", dest="repetitions", type=int, default=1,
+                    help="number of hills to climb in search")
 args = parser.parse_args()
 
 # A template is a dictionary that mimics a clang config, except in place of atomic values,
@@ -167,7 +169,7 @@ def main():
   best_score = measure(best_config)
   best_file = save(best_config)
 
-  while True:
+  for i in xrange(0, args.repetitions):
     # Hill climbing with random starting locations
     print >> sys.stderr, best_score, "best config yet is stored in", best_file
     # Start at a random place
@@ -201,6 +203,7 @@ def main():
       best_score = local_best_score
       best_file = save(best_config)
       print >> sys.stderr, "NEW BEST SCORE: ", best_score
+  print best_file
 
 if __name__ == "__main__":
   main()
