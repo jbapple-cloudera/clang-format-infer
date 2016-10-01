@@ -32,6 +32,20 @@ EXAMPLE_STYLES=$(mktemp)
 LD_LIBRARY_PATH="${CXX_COMPILER_DIR}"/lib64:${LD_LIBRARY_PATH} \
                             ./example-styles.exe > "${EXAMPLE_STYLES}"
 
+if [[ "${EXTENSIONS}" ]]
+then
+    OLD_SOURCE_DIR="${SOURCE_DIR}"
+    NEW_SOURCE_DIR="$(mktemp -d)/$(basename ${OLD_SOURCE_DIR})"
+    unset SOURCE_DIR
+
+    cp -r "${OLD_SOURCE_DIR}" "${NEW_SOURCE_DIR}"
+    find "${NEW_SOURCE_DIR}" -regextype posix-egrep -type f -not \
+         -regex "^.*\.($EXTENSIONS)$" -execdir rm {} \;
+    SOURCE_DIR="${NEW_SOURCE_DIR}"
+fi
+
+echo "Files: " $(find ${SOURCE_DIR} -type f | wc -l) >&2
+
 BIG_CONFIG=$(./search.py --constants="${CONSTANTS}" \
                          --clang-format="${CLANG_FORMAT}" \
                          --source-dir="${SOURCE_DIR}" < "${EXAMPLE_STYLES}")
