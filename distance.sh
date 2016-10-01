@@ -11,7 +11,7 @@ mkdir "${CELL}/new"
 cp -r "${DIR}" "${CELL}/new"
 cp "${CONFIG}" "${CELL}/.clang-format"
 
-find "${CELL}/new" -type f -execdir "${FORMATTER}" -i -style=file {} \;
+find "${CELL}/new" -type f -print0 | xargs -0 -n 1 -P 0 "${FORMATTER}" -i -style=file
 
 diff --suppress-common-lines -ru "${DIR}" "${CELL}/new/$(basename ${DIR})" | wc -l
 
