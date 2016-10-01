@@ -13,6 +13,4 @@ Finally:
 
 ./clang-format-infer.sh --cxx-compiler=... --clang-format=... --constants=... --source-dir=...
 
-The program never halts, but it periodically prints to stdout the filename of a
-clang-format config containing the best options found so far. That file is meant to be set
-as your .clang-format file.
+The stdout is a clang-format file; stderr includes diagnostics.
