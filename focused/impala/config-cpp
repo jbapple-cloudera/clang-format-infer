@@ -12,7 +12,7 @@ ExperimentalAutoDetectBinPacking: false
 BreakBeforeTernaryOperators: false
 BreakBeforeBinaryOperators: NonAssignment
 IncludeCategories:
-- {Priority: 3, Regex: ^<.*/}  # Boost and the like: <foo/bar>
-- {Priority: 1, Regex: ^<.*\.} # C and Unix libraries <baz.h>
-- {Priority: 2, Regex: ^<}     # C++ STL <qux>
-- {Priority: 4, Regex: ^"}     # Project-specific includes: "frob/borf.hpp"
+- {Priority: 3, Regex: '^<.*/'}  # Boost and the like: <foo/bar>
+- {Priority: 1, Regex: '^<.*\.'} # C and Unix libraries <baz.h>
+- {Priority: 2, Regex: '^<'}     # C++ STL <qux>
+- {Priority: 4, Regex: '^"'}     # Project-specific includes: "frob/borf.hpp"

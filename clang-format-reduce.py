@@ -119,10 +119,13 @@ def main():
         if key_seq != ["Language"] and get_deep(
                 style_config, key_seq) == get_deep(
                 min_config, key_seq):
+          print >> sys.stderr, "# Removed duplicate", key_seq, get_deep(
+            min_config, key_seq)
           unset_deep(min_config, key_seq)
       score = remove_unused(min_config)
       score = remove_unused(min_config)
       print >> sys.stderr, "# Found", len(min_config)
+      print >> sys.stderr, yaml.dump(min_config, default_flow_style=False)
       results.append((score, len(min_config), min_config))
   smallest = min(results)
   print >> sys.stderr, "#", smallest[0]
