@@ -1,6 +1,10 @@
 clang-format-infer tries to find a clang-format file that matches the style of your
 existing codebase as closely as possible.
 
+The indended users are projects that want to use an automatic formatter without making big
+changes in their current style and without taking a deep-dive into all of clang-format's
+obscure options.
+
 It is known to work with clang-format 3.8.
 
 Usage:
