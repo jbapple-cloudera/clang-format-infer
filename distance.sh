@@ -13,6 +13,7 @@ cp "${CONFIG}" "${CELL}/.clang-format"
 
 find "${CELL}/new" -type f -print0 | xargs -0 -n 1 -P 0 "${FORMATTER}" -i -style=file
 
-diff --suppress-common-lines -ru "${DIR}" "${CELL}/new/$(basename ${DIR})" | wc -l
+diff --suppress-common-lines -ru "${DIR}" "${CELL}/new/$(basename ${DIR})" \
+    | grep -E '^(\+|\-)[^-+]' | wc -l
 
 rm -rf "${CELL}"
