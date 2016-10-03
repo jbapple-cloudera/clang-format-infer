@@ -5,7 +5,6 @@ ReflowComments: true
 MaxEmptyLinesToKeep: 1
 KeepEmptyLinesAtTheStartOfBlocks: false
 SortIncludes: true
-DerivePointerAlignment: false
 DisableFormat: false
 ExperimentalAutoDetectBinPacking: false
 BreakBeforeTernaryOperators: false
